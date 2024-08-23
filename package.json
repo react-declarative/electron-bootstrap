@@ -1,0 +1,18 @@
+{
+  "name": "ignorant-picture-suit-bi0be",
+  "productName": "ignorant-picture-suit-bi0be",
+  "description": "My Electron application description",
+  "keywords": [],
+  "main": "./main.js",
+  "version": "1.0.0",
+  "author": "USER",
+  "scripts": {
+    "start": "electron ./src",
+    "build": "rimraf build && electron-builder --config electron-builder.yml"
+  },
+  "devDependencies": {
+    "electron": "31.4.0",
+    "electron-builder": "24.13.3",
+    "rimraf": "6.0.1"
+  }
+}

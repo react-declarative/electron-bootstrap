@@ -1,0 +1,14 @@
+{
+  "name": "electron-bootstrap",
+  "description": "react-declarative electron app bootstrap",
+  "author": {
+    "name": "Petr Tripolsky",
+    "email": "tripolskypetr@gmail.com",
+    "url": "https://github.com/react-declarative/react-declarative"
+  },
+  "main": "./main.js",
+  "version": "1.0.0",
+  "devDependencies": {
+    "electron": "31.4.0"
+  }
+}
