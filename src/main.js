@@ -7,12 +7,16 @@ const http = require('http');
 const APP_PORT = 1338;
 
 app.commandLine.appendSwitch('js-flags', '--max-old-space-size=16384');
+app.commandLine.appendSwitch("disable-http-cache");
 
 const uri = path.join(path.dirname(app.getPath('exe')), 'resources');
 
 const server = http.createServer((request, response) => {
   return handler(request, response, {
     public: uri,
+    headers: {
+      'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0'
+    },
   });
 });
 
@@ -56,7 +60,9 @@ async function createWindow () {
   mainWindow.setMenuBarVisibility(false);
   mainWindow.setMenu(null);
 
-  mainWindow.loadURL(`http://localhost:${APP_PORT}`);
+  mainWindow.loadURL(`http://localhost:${APP_PORT}`, {
+    extraHeaders: "pragma: no-cache\n"
+  });
 }
 
 app.whenReady().then(() => {
