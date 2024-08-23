@@ -1,7 +1,7 @@
 {
-  "name": "ignorant-picture-suit-bi0be",
-  "productName": "ignorant-picture-suit-bi0be",
-  "description": "My Electron application description",
+  "name": "electron-bootstrap",
+  "productName": "electron-bootstrap",
+  "description": "The electronjs application launcher",
   "keywords": [],
   "main": "./main.js",
   "version": "1.0.0",
