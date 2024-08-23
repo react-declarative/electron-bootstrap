@@ -4,6 +4,11 @@
 
 ![screencast](./assets/screencast.gif)
 
+## Contribute
+
+> [!IMPORTANT]
+> Made for using with [react-declarative](https://github.com/react-declarative/react-declarative) to solve your problems. **⭐Star** and **💻Fork** It on github will be appreciated
+
 ## Usage
 
 **1. Install dependencies**
