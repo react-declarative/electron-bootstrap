@@ -1,19 +1,332 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru" translate="no">
   <head>
-    <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
-    <link href="./styles.css" rel="stylesheet">
-    <title>Hello World!</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-    We are using Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
+    <meta charset="utf-8" />
+    <meta name="theme-color" content="#000000" />
+    <title>RealEstate APP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1, minimal-ui">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="RealEstate CRM">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="apple-touch-icon" sizes="512x512" href="/logo/icon512_maskable.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/logo/icon512_maskable.png">
+    <link rel="manifest" href="/manifest.json">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.4.0/mapbox-gl.js"></script>
+    <script>
+      mapboxgl.accessToken = 'pk.eyJ1IjoidHJpcG9sc2t5cGV0ciIsImEiOiJjbHk0YWgzNmUwMGRiMmpzN3hzbjB4Z3J2In0.3oxAilQNCBFw7zO0AIbxfQ';
+    </script>
+    <style>
+      :root {
+        color-scheme: only light;
+      }
 
-    <!-- You can also require other files to run in this process -->
-    <script src="./renderer.js"></script>
+      * {
+        font-family: "Roboto", sans-serif !important;
+        overscroll-behavior: none;
+      }
+
+      body::-webkit-scrollbar, html::-webkit-scrollbar {
+        display: none;
+      }
+
+      ::-webkit-scrollbar {
+        background-color: #fff;
+        width: 16px;
+        height: 16px;
+      }
+
+      ::-webkit-scrollbar-track {
+        background-color: #fff;
+      }
+
+      ::-webkit-scrollbar-thumb {
+        background-color: #babac0;
+        border-radius: 16px;
+        border: 4px solid #fff;
+      }
+
+      ::-webkit-scrollbar-button {
+        display: none;
+      }
+
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      input[type=number] {
+        -moz-appearance: textfield;
+      }
+
+      html,
+      body {
+        min-height: 100vh;
+        min-width: 100vw;
+        background: #ffffff;
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+      }
+
+      .loader_wraper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        width: 100vw;
+      }
+
+      .loader,
+      .loader:after {
+        border-radius: 50%;
+        width: 10em;
+        height: 10em;
+      }
+
+      .loader {
+        margin: 60px auto;
+        font-size: 10px;
+        position: relative;
+        text-indent: -9999em;
+        border-top: 1.1em solid transparent;
+        border-right: 1.1em solid transparent;
+        border-bottom: 1.1em solid transparent;
+        border-left: 1.1em solid #1f497a;
+        -webkit-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+        transform: translateZ(0);
+        -webkit-animation: load8 1.1s infinite linear;
+        animation: load8 1.1s infinite linear;
+      }
+
+      @-webkit-keyframes load8 {
+        0% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes load8 {
+        0% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+
+        100% {
+          -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+        }
+      }
+
+      .react-declarative__listContentMark, .react-declarative__listPaperMark {
+        overflow: visible !important;
+      }
+    </style>
+    <style>
+      .MuiPaper-root:has(.react-declarative__scaffold2Background) {
+        scrollbar-width: none;
+      }
+    </style>
+    <link
+      rel="prefetch"
+      href="/images/cubes.png"
+      as="image"
+      type="image/svg+xml"
+    />
+    <link
+      rel="prefetch"
+      href="/images/snow.png"
+      as="image"
+      type="image/svg+xml"
+    />
+    <link
+      rel="prefetch"
+      href="/images/square.png"
+      as="image"
+      type="image/svg+xml"
+    />
+    <link
+      rel="prefetch"
+      href="/images/triangle.png"
+      as="image"
+      type="image/svg+xml"
+    />
+    <link
+      rel="prefetch"
+      href="/images/cells.png"
+      as="image"
+      type="image/svg+xml"
+    />
+    <link
+      rel="prefetch"
+      href="/images/house.png"
+      as="image"
+      type="image/svg+xml"
+    />    
+    <link
+      rel="prefetch"
+      href="/bg.jpg"
+      as="image"
+      type="image/jpeg"
+    />
+    <!--npm run make-prefetch-->
+    <link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/analyse_by.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/arenda.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/attach_taget_type.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/balkon_doma.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/balkon_kvartira.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/balkon.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/bassejn.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/currency_for.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/currency_valyuta.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/elektrichestvo_dom.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/elektrichestvo_zemlya.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/elektrichestvo.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/energonositel_obekta.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/filial.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/garazh.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/gaz_dom.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/gaz_zemlya.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/gaz.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/istochnik.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/kanalizacziya_dom.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/kanalizacziya_zemlya.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/kanalizacziya.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/kategoriya_obekta.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/kontakt.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/lift_dom.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/lift_kommercziya.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/lift_kvartira.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/loyalnost_klienta.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/masterdetail.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/mebel_dom.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/mebel_kvartira.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/mebel.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/mestopolozhenie_obekta.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/mestopolozhenie-obekta_dom.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/mestopolozhenie-obekta_zemlya.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/naznachenie_obekta.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/naznachenie-obekta-zemlya_uchastok.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/ofis.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/osnovanie-deyatelnosti-dannogo_licza.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/otdel.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/parkovka_kvartira.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/parkovka_zemlya.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/parkovka.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/podezdnye_puti.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/podkategoriya_obekta1.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/podkategoriya_obekta2.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/pol.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/price_by.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/prodazha.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/raspolozhenie_doma.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/raspolozhenie_obekta.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/rent_czena_for.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/ryadom_est1.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/ryadom_est2.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/ryadom_est3.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/ryadom_est4.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/ryadom_est5.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/ryadom_est6.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/ryadom_est7.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/ryadom_est8.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/ryadom_est9.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/sanuzel_doma.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/sanuzel_kvartira.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/sanuzel.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/semejnoe_polozhenie.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/sistema_kondiczionirovaniya.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/sistema_otopleniya.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/sistema-kondiczionirovaniya_dom.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/sistema-kondiczionirovaniya_zemlya.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/sistema-otopleniya_dom.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/sistema-otopleniya_kvartiry.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/sistema-otopleniya_zemlya.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/sostoyanie_doma.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/sostoyanie_obekta.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/sostoyanie_remonta-kvartiry.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/sostoyanie_remonta.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/sostoyanie-obekta_zemlya.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/sostoyanie-remonta_zemlya.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/status_klienta.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/status_sotrudnika.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/tip_klienta.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/tip_nedvizhimosti.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/tip_planirovki.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/tip_stroeniya.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/tip_zemli_uchastka.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/tip-stroeniya_doma.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/tip-stroeniya_kvartiry.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/vid_iz_okna_dom.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/vid_iz_okna.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/vid_liczenzii.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/vid_obekta.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/vnutri_est1.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/vnutri_est2.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/vnutri_est3.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/vnutri_est4.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/vnutri_est5.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/vnutri_est6.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/vnutri_est7.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/vnutri_est8.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/vnutri_est9.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/voda_dom.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/voda_zemlya.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/voda.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/constant/yesno.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/i18n/locale.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/i18n/routes.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/resource/advertising.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/resource/excel_import.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/resource/gorod.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/resource/history.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/resource/mahallya.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/resource/metro.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/resource/notify.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/resource/oblast.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/resource/orientir.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/resource/rajon.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/resource/strana.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/resource/subrajon.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/resource/telegram_dot_map.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/resource/telegram.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./assets/resource/ulicza.json">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./lang/ignore.txt">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./lang/ru_RU.aff">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./lang/ru_RU.dic">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./lang/uz_UZ.aff">
+<link rel="preload" as="fetch" crossorigin="anonymous" href="./lang/uz_UZ.dic">
+    <!--npm run make-prefetch-->
+    <script type="module" crossorigin src="/assets/index-d2b31277.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-2ba426bd.js">
+    <script type="module">import.meta.url;import("_").catch(()=>1);async function* g(){};if(location.protocol!="file:"){window.__vite_is_modern_browser=true}</script>
+    <script type="module">!function(){if(window.__vite_is_modern_browser)return;console.warn("vite: loading legacy chunks, syntax error above and the same error below should be ignored");var e=document.getElementById("vite-legacy-polyfill"),n=document.createElement("script");n.src=e.src,n.onload=function(){System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))},document.body.appendChild(n)}();</script>
+  </head>
+
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+      <div class="loader_wraper">
+        <div class="loader"></div>
+      </div>
+    </div>
+    
+    <script nomodule>!function(){var e=document,t=e.createElement("script");if(!("noModule"in t)&&"onbeforeload"in t){var n=!1;e.addEventListener("beforeload",(function(e){if(e.target===t)n=!0;else if(!e.target.hasAttribute("nomodule")||!n)return;e.preventDefault()}),!0),t.type="module",t.src=".",e.head.appendChild(t),t.remove()}}();</script>
+    <script nomodule crossorigin id="vite-legacy-polyfill" src="/assets/polyfills-legacy-14159161.js"></script>
+    <script nomodule crossorigin id="vite-legacy-entry" data-src="/assets/index-legacy-3646134e.js">System.import(document.getElementById('vite-legacy-entry').getAttribute('data-src'))</script>
   </body>
 </html>

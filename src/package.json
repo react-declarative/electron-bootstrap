@@ -10,5 +10,8 @@
   "version": "1.0.0",
   "devDependencies": {
     "electron": "31.4.0"
+  },
+  "dependencies": {
+    "serve-handler": "6.1.5"
   }
 }

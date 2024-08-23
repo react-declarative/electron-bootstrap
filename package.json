@@ -8,7 +8,8 @@
   "author": "USER",
   "scripts": {
     "start": "electron ./src",
-    "build": "rimraf build && electron-builder --config electron-builder.yml"
+    "build": "rimraf build && electron-builder --config electron-builder.yml",
+    "postinstall": "sh ./scripts/postinstall.sh"
   },
   "devDependencies": {
     "electron": "31.4.0",
