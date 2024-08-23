@@ -9,6 +9,8 @@
   "scripts": {
     "start": "electron ./src",
     "build": "rimraf build && electron-builder --config electron-builder.yml",
+    "build:windows": "rimraf build && electron-builder --win --config electron-builder.yml",
+    "build:linux": "rimraf build && electron-builder --linux --config electron-builder.yml",
     "postinstall": "sh ./scripts/postinstall.sh"
   },
   "devDependencies": {

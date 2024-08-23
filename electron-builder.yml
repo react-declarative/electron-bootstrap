@@ -14,3 +14,9 @@ win:
     - msi
     - zip
   icon: "./images/logo.png"
+linux:
+  target:
+    - AppImage
+    - deb
+  icon: "./images/logo.png"
+  category: "Utility"
