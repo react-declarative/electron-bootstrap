@@ -51,6 +51,11 @@ async function createWindow () {
     }
   });
 
+  mainWindow.removeMenu();
+
+  mainWindow.setMenuBarVisibility(false);
+  mainWindow.setMenu(null);
+
   mainWindow.loadURL(`http://localhost:${APP_PORT}`);
 }
 
