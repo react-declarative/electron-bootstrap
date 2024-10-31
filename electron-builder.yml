@@ -1,5 +1,5 @@
 appId: com.example.myapp
-productName: MyApp
+productName: RealEstateCRM
 directories:
   output: build
   app: src
